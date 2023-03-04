@@ -24,7 +24,7 @@ export class UserController {
       const users = await this.userService.get();
       return response.status(HttpStatus.OK).json({
         message: 'All students data found successfully',
-        users,
+        data: users,
       });
     } catch (error) {
       throw new HttpException(
@@ -46,7 +46,7 @@ export class UserController {
       const userCreate = await this.userService.create(body);
       return response.status(HttpStatus.CREATED).json({
         message: `User has been created successfully`,
-        userCreate,
+        data: userCreate,
       });
     } catch (error) {
       throw new HttpException(
@@ -68,7 +68,7 @@ export class UserController {
       const userFounded = await this.userService.getById(id);
       return response.status(HttpStatus.OK).json({
         message: 'User found successfully',
-        userFounded,
+        data: userFounded,
       });
     } catch (error) {
       throw new HttpException(
@@ -87,7 +87,7 @@ export class UserController {
   @Patch('/:id')
   async updateUser(
     @Res() response,
-    @Body() body: UpdateUserDto,
+    @Body() body: CreateUserDto,
     @Param('id') id: string,
   ) {
     try {
